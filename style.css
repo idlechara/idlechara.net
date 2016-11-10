@@ -1,0 +1,38 @@
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    background: 	#FAD089;
+    color: #574435;
+}
+
+.nekoi_center{
+    width: 100%;
+    margin: 0 auto;
+}
+.nekoi_title{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+    width: 100%;
+}
+.nekoi_container{
+    width: 400px;
+    margin: 12px;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.content{
+    width: 100%;
+    padding: 10px;
+    background: #E0DC8B;
+    border-radius: 25px;
+    border-color: black;
+    border-width: 3px;
+    text-align: justify;
+}
+
+a{
+    text-decoration: none;
+    color: #ED4C57;
+    font-weight: bold;
+}
