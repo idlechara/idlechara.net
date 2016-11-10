@@ -20,7 +20,9 @@ body{
     margin-left: 24px;
     margin-right: 24px;
 }
-
+.left_align{
+text-align: left;
+}
 .content{
     width: 100%;
     padding: 10px;
