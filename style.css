@@ -20,9 +20,19 @@ body{
     margin-left: 24px;
     margin-right: 24px;
 }
+
+.nekoi_container.wide{
+    width: 800px;
+}
+
+.nekoi_container.justified{
+    text-align: justify;
+}
+
 .left_align{
 text-align: left !important;
 }
+
 .content{
     width: 100%;
     padding: 10px;
@@ -33,8 +43,20 @@ text-align: left !important;
     text-align: justify;
 }
 
+.content.transparent{
+    background: transparent;
+}
+
 a{
     text-decoration: none;
     color: #ED4C57;
     font-weight: bold;
+}
+
+b{
+    font-weight: bold;
+}
+
+i{
+    font-style: italic;
 }
