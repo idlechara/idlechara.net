@@ -40,12 +40,12 @@
                 <br><br> Learning process in ANNs is not trivial as one can think, even simple ANNs like used in Self Organizing
                 Maps are a complex thing to imagine in a hardware design, from the point of view of a programmer. We can
                 replace a neuron with a set of operational amplifiers, resistors, capacitors, transistors and other things,
-                but that is not usable by us, developers... well, we can but after <a href="https://electronics.stackexchange.com/questions/41528/fpga-programming-where-to-begin"> an intense suffering.</a>                Specially when implementing the learning phase of a SOM, <a href="https://link.springer.com/article/10.1007/s11554-013-0387-5"> searching for the <i>best matching unit</i> </a>, traveling
-                all the circuitry and make all neurons aware of the results of their pairs and then finally taking a decision.
-                It is not that hard though, since you can always propagate the result of each neuron... but wait, you need
-                to persist the signal to learn. Now each neuron has a live signal expresing a value to be compared in order to find
-                our best matching unit. And then you need to perform a radial search across the grid in order to perform
-                prototype migrations... Fuck it.
+                but that is not usable by us, developers... well, we can but after <a href="https://electronics.stackexchange.com/questions/41528/fpga-programming-where-to-begin"> an intense suffering.</a>                Specially when implementing the learning phase of a SOM, <a href="https://link.springer.com/article/10.1007/s11554-013-0387-5"> searching for the <i>best matching unit</i> </a>,
+                traveling all the circuitry and make all neurons aware of the results of their pairs and then finally taking
+                a decision. It is not that hard though, since you can always propagate the result of each neuron... but wait,
+                you need to persist the signal to learn. Now each neuron has a live signal expresing a value to be compared
+                in order to find our best matching unit. And then you need to perform a radial search across the grid in
+                order to perform prototype migrations... Fuck it.
 
                 <br><br> Then the problem of making such hardware is the usability for final users. Imagining that such technology
                 is a reality, then it is useless without a proper toolchain that programmers can use abstracting from low
@@ -53,17 +53,25 @@
                 non specialist users and it is cool and easy to use. Code should be meant for humans, not for machines.
 
                 <br><br> There are ton of work about using FPGAs to implement neural network (<a href="https://www.google.cl/search?q=google&oq=google+&aqs=chrome..69i57j69i60l4j0.2191j0j7&sourceid=chrome&ie=UTF-8#q=fpga+neural+network+implementation"> you can search in google about "FPGA
-                neural networks" </a>), so using FPAAs in mixed mode to accomplish this is not a great asset, as they cannot contribute much
-                for the meantime, and there is even work related to
+                neural networks" </a>), so using FPAAs in mixed mode to accomplish this is not a great asset, as they cannot
+                contribute much for the meantime, and there is even work related to
                 <a href="https://www.research.ibm.com/cognitive-computing/neurosynaptic-chips.shtml"> <i>neurosynaptic chips</i></a> (SyNAPSE chips) by IBM but for me, a mere student with no money and delayed
                 two years such thing is not avaliable. I don't even have anybody to ask about it here. Yeah right, get involved
-                but I do not have the time nor the resources to do so.
+                but I do not have the time nor the resources to do so. I am just a hardware enthusiast, I have not taken
+                any EDA course, nor a decent electronics one, all that I know is self taught by reading books and browing
+                the internet (yeah, you can use it for more than just checking Facebook). I am even saving money to buy an
+                FPGA to stop using simulators and then playing with an FPAA if I get enough level to fight against one.
 
                 <br><br> I know that this makes no sense at all trying to implement both learning and recognition in the
-                same hardware as well as the toolchain in a mixed mode FPGA if such technology to replicate human brain behiavour already exists. But I just want to know if there is a way to do it and if it
-                is possible to implement it.
+                same hardware as well as the toolchain in a mixed mode FPGA if such technology to replicate human brain behiavour
+                already exists. But I just want to know if there is a way to do it and if it is possible to implement it.
 
                 <br><br> Would not you do the same thing if you are curious?
+
+
+                <br><br> PD: Thanks <a href="https://twitter.com/FelipeAstroza"> @FelipeAstroza </a> for awakening my interest in
+                hardware development while being a CS student. I have been wondering for years what to do and if that is really
+                something that I can, and now, finally see something that it would be great to play with.   
             </div>
         </div>
     </div>
