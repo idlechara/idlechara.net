@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-US" style="height: 100%;">
+
+<head>
+    <title>Mutable circuitry, the most weirdest idea that I ever had</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+</head>
+
+<body>
+    <div class="nekoi_center">
+        <div class="nekoi_container wide">
+            <div class="nekoi_title">Mutable circuitry, the most weirdest idea that I ever had.</div>
+            <div class="content">
+                The past years I have been learning about artificial neural networks and I found neurogenesis as an interesting concept for
+                me. You know, our brain stores information and learn by mutating the connections between their neurons, and
+                sometimes a new neuron is born between them or sometimes is killed by one reason or another, who knows. But
+                this is a problem when simulating that behiavour on a computer, we do not have <i>infinite precision</i>                nor almost instant propagation time. Computers can be shit sometimes.
+
+                <br><br>The problem with artificial neural networks it's their processing time, depending on how you organise
+                the grid, to perform learning can be a very intensive operation, even with <a href="https://www.quora.com/Why-and-how-are-GPUs-so-important-for-Neural-Network-computations"> GPUs which can reduce the constant
+                factor of their time complexity </a> but sadly, not it's order. More over, ANNs doesn't have infinite precision
+                as animal neurones have with their electric signals. Ok, maybe it's an analog problem and we are cursed because
+                we want to synthetise their behiavour in a digital way... we humans are crazy sometimes but for now, that
+                is the best that we can do.
+
+                <br><br>Then, I realised that if the computing model changes for ANNs then there is a possibility to accelerate
+                the computation time or at least to improve their precision by making a physic electronic replica of the
+                ANN (ignoring background noise and such for now), but those cannot be implemented with a simple <a href="http://ieeexplore.ieee.org/document/7008986/"> FPGA due
+                to their digital nature</a> beacuse of <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.117.9342"> processing density.</a>
+
+                <br><br>There are FPAAs which implement analog blocks which someone can use to simulate them by changing
+                their configuration of passive components but without a <a href="http://users.ece.gatech.edu/phasler/RASP30_SoCFPAA.pdf"> mixed mode </a>                it cannot implement the algorithms needed to perform learning operations. As far as I know, GPUs are used
+                for the learning phase and FPGAs used for recognition and it works pretty well, <a href="https://link.springer.com/chapter/10.1007%2F978-3-540-85857-7_11"> makes sense right?.</a>
+
+                <br><br> Learning process in ANNs is not trivial as one can think, even simple ANNs like used in Self Organizing
+                Maps are a complex thing to imagine in a hardware design, from the point of view of a programmer. We can
+                replace a neuron with a set of operational amplifiers, resistors, capacitors, transistors and other things,
+                but that is not usable by us, developers... well, we can but after <a href="https://electronics.stackexchange.com/questions/41528/fpga-programming-where-to-begin"> an intense suffering.</a>                Specially when implementing the learning phase of a SOM, <a href="https://link.springer.com/article/10.1007/s11554-013-0387-5"> searching for the <i>best matching unit</i> </a>, traveling
+                all the circuitry and make all neurons aware of the results of their pairs and then finally taking a decision.
+                It is not that hard though, since you can always propagate the result of each neuron... but wait, you need
+                to persist the signal to learn. Now each neuron has a live signal expresing a value to be compared in order to find
+                our best matching unit. And then you need to perform a radial search across the grid in order to perform
+                prototype migrations... Fuck it.
+
+                <br><br> Then the problem of making such hardware is the usability for final users. Imagining that such technology
+                is a reality, then it is useless without a proper toolchain that programmers can use abstracting from low
+                level details. Take Google's Tensor Flow as example, it abstracted many things making AI more friendly to
+                non specialist users and it is cool and easy to use. Code should be meant for humans, not for machines.
+
+                <br><br> There are ton of work about using FPGAs to implement neural network (<a href="https://www.google.cl/search?q=google&oq=google+&aqs=chrome..69i57j69i60l4j0.2191j0j7&sourceid=chrome&ie=UTF-8#q=fpga+neural+network+implementation"> you can search in google about "FPGA
+                neural networks" </a>), so using FPAAs in mixed mode to accomplish this is not a great asset, as they cannot contribute much
+                for the meantime, and there is even work related to
+                <a href="https://www.research.ibm.com/cognitive-computing/neurosynaptic-chips.shtml"> <i>neurosynaptic chips</i></a> (SyNAPSE chips) by IBM but for me, a mere student with no money and delayed
+                two years such thing is not avaliable. I don't even have anybody to ask about it here. Yeah right, get involved
+                but I do not have the time nor the resources to do so.
+
+                <br><br> I know that this makes no sense at all trying to implement both learning and recognition in the
+                same hardware as well as the toolchain. But hell, I just want to know if there is a way to do it and if it
+                is possible to implement it.
+
+                <br><br> Would not you do the same thing if you are curious?
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    var elem = document.querySelector('.nekoi_center');
+    var msnry = new Masonry( elem, {
+    itemSelector: '.nekoi_container',
+    fitWidth: true
+    });
+    var msnry = new Masonry( '.nekoi_center', {
+    });
+    setTimeout(function(){ msnry.layout(); }, 200);
+</script>
+
+</html>
