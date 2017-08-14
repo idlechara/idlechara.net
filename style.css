@@ -4,6 +4,14 @@ body{
     color: #574435;
 }
 
+.big_text {
+    font-size: 24px
+}
+
+.texttt {
+    font-family: "Times New Roman";
+}
+
 .nekoi_center{
     width: 100%;
     margin: 0 auto;
