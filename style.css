@@ -25,6 +25,9 @@ body{
 .nekoi_container.wide{
     width: 800px;
 }
+.nekoi_container.wide1000{
+    width: 1000px;
+}
 
 .nekoi_container.justified{
     text-align: justify;
