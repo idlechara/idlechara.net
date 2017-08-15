@@ -1,7 +1,11 @@
 body{
-    font-family: 'Josefin Sans', sans-serif;
-    background: 	#FAD089;
-    color: #574435;
+    font-family: "Roboto", serif;
+    background: 	#282423;
+    color: #b7b7b6;   
+    
+    font-family: "Roboto", serif;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .big_text {
@@ -48,7 +52,7 @@ text-align: left !important;
 .content{
     width: 100%;
     padding: 10px;
-    background: #E0DC8B;
+    background: #181413;
     border-radius: 15px;
     border-color: black;
     border-width: 3px;
@@ -61,8 +65,9 @@ text-align: left !important;
 
 a{
     text-decoration: none;
-    color: #ED4C57;
-    font-weight: bold;
+    color: #a2482e;
+    cursor: pointer;
+    /* font-weight: bold; */
 }
 
 b{
