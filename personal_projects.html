@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US" style="height: 100%;">
+
+<head>
+    <title>Hisssssss...</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="nekoi_title">Nekoi's personal projects</div>
+    <div class="nekoi_center">
+        
+        <div class="nekoi_container">
+            <div class="content">
+                <a href="https://hackaday.io/project/13992-inverse-keylogger">Inverse Keylogger: </a> I was sick of typing
+                my passwords so I made a rubberducky with a screen to be my physical keyring. I'm stuck trying to migrate
+                openssl to the microcontroller but once I finish it I can put it SD Card support on it. My screen broke so
+                until I got a replacement the project is halted... :c UPDATE: Just brought a new screen but it seems that
+                the code needs a few more touches before it's "secure".
+            </div>
+        </div>
+        <div class="nekoi_container">
+            <div class="content">
+                <a href="https://github.com/KukyNekoi/TBotLeecher">TBotLeecher: </a> I'm building a simple image/video leecher
+                for Twitter which retrieves tweets from one user or tagged with certain words. It needs some refining but
+                I plan to add more datasources like Instagram and Facebook and integration with volafile and another filesharing
+                services.
+            </div>
+        </div>
+        <div class="nekoi_container">
+            <div class="content">
+                <a href="https://github.com/KukyNekoi/FuwanViewer">FuwanViewer: </a> A long time ago I was part of Fuwanovel
+                comunity, and then I wanted to help building a .NET app to manage the visual novels torrents that they offered.
+                Well, now the site doesn't distribute visual novel torrents and the application is now useless but it was
+                my very first experience working with people from overseas. I'm happy about it.
+            </div>
+        </div>
+        <div class="nekoi_container">
+            <div class="content">
+                <a href="https://github.com/KukyNekoi/raton">raton: </a> It's the source code of the last robot that I used
+                at UTFSM Robotics Contest (2014). It has a implementation of a cooperating ARM-AVR processors working together
+                to solve cycled laberinths by using a graph implementaion of flood-fill. Why did I used two processors? Because
+                I wanted one to be in charge of solving the maze (Teensy ARM) while the other (AVR ATMEGA328p) traverses
+                it using the info provided by the solver.
+
+
+            </div>
+        </div>
+        <div class="nekoi_container">
+            <div class="content">
+                <a href="https://github.com/KukyNekoi/LSM303DLHC">LSM303DLHC: </a> At the previous Robotics Contest that
+                I attended, both I and <a href="https://twitter.com/FelipeAstroza"> a friend </a> were trying to experiment
+                with accelerometers and magnetometers to handle orientation for "Leela", a multipropouse robot that he made
+                using a PS3 Eye. Well, that's the library used on a BeagleBone to test if that was possible to accomplish
+                in order to win the competition (in the end we used a mouse to track the movements xD).
+            </div>
+        </div>
+        <div class="nekoi_container">
+            <div class="content">
+                <a href="https://github.com/KukyNekoi/UTAL">UTAL: </a> There are some codes that I managed to save from my
+                former HDD with things that I've been doing at university while studing, like assignments and other hobbies.
+
+            </div>
+        </div>
+        <div class="nekoi_container">
+            <div class="content">
+                <a href="https://github.com/KukyNekoi/Research">Research: </a> Rememer that I talked you about research?
+                There you can find some things that I'm allowed to publish.
+
+
+            </div>
+        </div>
+        <div class="nekoi_container">
+            <div class="content"> 
+                <a href="mutable-circuitry.html">Other weird ideas: </a>
+
+                I also have many of <i>"dream projects"</i>, which are nearly impossible things for me that I've
+                started developing on where I hitted both my resource or time limits avaliable (remember that I'm still a
+                student, both money and time are a a rare thing for me).
+
+                <br><br>One of those is to continue developing my theory (and implementation of course) about
+                <a href="mutable-circuitry.html"> <i>"mutable circuitry"</i> </a>; to extend my SOM implementation to give
+                <i>neurogenesis capabilities to artifical
+                neural grids and free-form organization</i>; finally, to make a <i>emotional assistant</i>                AI. How did I? get to that, I don't know, I saw it on a dream.
+            </div>
+            <br>
+        </div>
+
+    </div>
+</body>
+<script>
+    var elem = document.querySelector('.nekoi_center');
+    var msnry = new Masonry(elem, {
+        itemSelector: '.nekoi_container',
+        fitWidth: true
+    });
+    var msnry = new Masonry('.nekoi_center', {
+    });
+    setTimeout(function () { msnry.layout(); }, 200);
+
+</script>
+
+</html>
