@@ -37,6 +37,11 @@ body{
 .nekoi_container.wide{
     width: 800px;
 }
+
+.nekoi_container.smol{
+    width: 120px;
+}
+
 .nekoi_container.wide1000{
     width: 1000px;
 }
