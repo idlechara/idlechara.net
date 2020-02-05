@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Emscripten-LZMA Ported Code</title>
+  </head>
+  <body>
+    <script>
+      var Module  = {
+        'noInitialRun': true,
+        'print': function(text) { 
+          console.log('stdout: ' + text);
+          let child = document.createElement('div');
+          child.innerHTML = text;
+          document.getElementById('output').appendChild(document.createElement('br'));
+          child = child.firstChild;
+          document.getElementById('output').appendChild(child);
+        },
+        'printErr': function(text) {
+          console.log('stderr: ' + text);
+          let child = document.createElement('div');
+          child.innerHTML = text;
+          document.getElementById('output').appendChild(document.createElement('br'));
+          child = child.firstChild;
+          document.getElementById('output').appendChild(child); 
+        }
+      };
+    </script>
+    <script type="text/javascript" src="lzma.js"></script>
+    <script>
+      var saveData = (function () {
+        let a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        return function (buf, fileName) {
+          var blob = new Blob([buf],  {"type" : "application/octet-stream" });
+          var url = URL.createObjectURL(blob);
+          a.href = url;
+          a.download = fileName;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        };
+      }());
+
+      var openFile = function() {
+        let file    = document.querySelector('input[type=file]').files[0];
+        let reader  = new FileReader();
+        reader.addEventListener("load", function () {
+          console.log("File loaded");
+          Module['arguments'] = ['e', `${file.name}`, `${file.name}.lzma`],
+          Module["FS"].createDataFile('.', Module.arguments[1], atob(reader.result.split(',')[1]), true, true);
+          Module["callMain"](Module['arguments']);
+          let result = Module["FS"].readFile(`${Module.arguments[2]}`);
+          let base64String = btoa(new Uint8Array(result.buffer).reduce(function (data, byte) {
+              return data + String.fromCharCode(byte);
+          }, ''));
+          saveData(result, `${file.name}.lzma`);
+        }, false);
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }  
+      }
+    </script>
+    Put a file here and you'll see the results.
+    <input type="file" onchange="openFile()"><br>
+    <br>
+    <div id="output">
+    </div>
+  </body>
+</html>
+
+
