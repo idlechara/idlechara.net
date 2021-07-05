@@ -22,7 +22,7 @@ var   registered_development_entries      = {};
 
 var     Mutex = require('async-mutex').Mutex;
 const entriesFolder                = 'entries/';
-const buildFolder                  = 'build';
+const buildFolder                  = 'docs';
 const fsExtra                      = require('fs-extra');
 const blogMutex = new Mutex();
 const translationMutex = new Mutex();

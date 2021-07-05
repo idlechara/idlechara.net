@@ -570,7 +570,9 @@
   border-bottom-color: #eee; }
 
 body {
-  background-color: #FFEFD5;
+  background-color: #C1E7e3;
+  background-image: url("background.webp");
+  background-size: 20%;
   font-family: 'Anonymous Pro', monospace; }
 
 .title {
@@ -594,9 +596,9 @@ body {
     border-style: solid;
     border-color: gray; }
   .sidebar .link:nth-child(even) > .item {
-    background-color: #36e37bFF; }
+    background-color: #DABFDE; }
   .sidebar .link:nth-child(odd) > .item {
-    background-color: #F5F5DCFF; }
+    background-color: #FFDCF4; }
 
 .content {
   float: right;
@@ -605,8 +607,8 @@ body {
   margin: 1em;
   padding-left: 2em;
   border: 1px solid;
-  background-color: white;
-  border-color: gray; }
+  background-color: #DCFFFB;
+  border-color: #C1BBBD; }
   .content img {
     width: auto;
     max-width: 70%;
