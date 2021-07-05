@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Not purring</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p&amp;subset=japanese" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/idea.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+  <div class="title">
+    mimashita.moe
+  </div>
+  <div class="sidebar">
+      <a class="link" href="/">
+        <div class="sidebar-item item">
+          Home
+        </div>
+      </a>
+      <a class="link" href="/links.html">
+        <div class="sidebar-item item">
+          Links
+        </div>
+      </a>
+      <a class="link" href="/about.html">
+        <div class="sidebar-item item">
+          About
+        </div>
+      </a>
+      <a class="link" href="https://2v30khz.wordpress.com/">
+        <div class="sidebar-item item">
+          Blog
+        </div>
+      </a>
+      <a class="link" href="/translation.html">
+        <div class="sidebar-item item">
+          TL Blog (still migrating)
+        </div>
+      </a>
+      <a class="link" href="/dev.html">
+        <div class="sidebar-item item">
+          Dev Blog (paused)
+        </div>
+      </a>
+  </div>
+  <div class="content markdown-body">
+    <div class="entry">
+      <div class="blog-entry">
+  <div class="timestamp">
+    Tue Jan 8 19:22:38 -03 2019
+  </div>
+  <h1 id="degree-project-pt-3---metric-space-indexing-explained-wip">Degree project pt. 3 - Metric space indexing explained (WIP)</h1>
+<p>This post will cover the fundamentals on how metric spaces actually work</p>
+<h2 id="a-bit-of-jokes">A bit of jokes</h2>
+<p>Before going into indexing and similarity search, let's dive a bit onto the notion of <a href="https://en.wikipedia.org/wiki/Distance">distance</a>. According<br />
+to wikipedia, the term "Distance" is a numerical measurement of how far apart objects are. As it, we can say that it is pretty much a human concept.<br />
+Whilst for animals the concept of "distance" is something that they actually use everyday, we humans have used this concept to reflect a bunch of<br />
+things into reality.</p>
+<p>One of such concepts is similarity, which is defined how "distant" an object is closer to another in terms of its caracteristics. For example, we say that two cats are similar animals because both are mammals but if you ask your neighbour if your cat is similar to yours then he/she will probably say: "You're wrong, my cat is different than yours.". Obviously, because as your neighbour sees other "qualities" on his/her cat, there are no cat like his/her own.</p>
+<p>But if you're grumpy and you say "Your cat is as grumpy as me" will probably agree with you, as you're comparing only one feature from the entire set of features of your cat.</p>
+<p>So, distance and similarity concepts are quite ambiguous and depends heavily on whom you ask or the context on which word is used.</p>
+<h2 id="similarity-between-two-elements-and-how-to-reflect-that-into-a-database">Similarity between two elements and how to reflect that into a database</h2>
+<p>Let's say now that we have a list of cats as follows</p>
+<table>
+<thead>
+<tr>
+<th id="id" style="text-align:left;">id</th>
+<th id="breed" style="text-align:center;">breed</th>
+<th id="hair_color" style="text-align:center;">hair color</th>
+<th id="size_(cm)" style="text-align:center;">size (cm)</th>
+<th id="eye_color" style="text-align:right;">eye color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">1</td>
+<td style="text-align:center;">calico</td>
+<td style="text-align:center;">brown, yellow, white</td>
+<td style="text-align:center;">130</td>
+<td style="text-align:right;">brown</td>
+</tr>
+<tr>
+<td style="text-align:left;">2</td>
+<td style="text-align:center;">calico</td>
+<td style="text-align:center;">brown, yellow, white</td>
+<td style="text-align:center;">120</td>
+<td style="text-align:right;">brown</td>
+</tr>
+<tr>
+<td style="text-align:left;">3</td>
+<td style="text-align:center;">shorthair</td>
+<td style="text-align:center;">black, white</td>
+<td style="text-align:center;">134</td>
+<td style="text-align:right;">blue</td>
+</tr>
+<tr>
+<td style="text-align:left;">4</td>
+<td style="text-align:center;">shorthair</td>
+<td style="text-align:center;">black, grey, white</td>
+<td style="text-align:center;">102</td>
+<td style="text-align:right;">blue, brown</td>
+</tr>
+<tr>
+<td style="text-align:left;">5</td>
+<td style="text-align:center;">persian</td>
+<td style="text-align:center;">orange</td>
+<td style="text-align:center;">112</td>
+<td style="text-align:right;">blue</td>
+</tr>
+<tr>
+<td style="text-align:left;">6</td>
+<td style="text-align:center;">tonkinese</td>
+<td style="text-align:center;">black</td>
+<td style="text-align:center;">150</td>
+<td style="text-align:right;">brown</td>
+</tr>
+</tbody>
+</table>
+<p>Then, it's clear that cats 1 and 2 are the most similar but it's because they do share similar traits. But in terms of size, the cats 1 and 3 are the most similar in betweenn, since they have only 4 centimeters of difference in between.</p>
+<p>So, how do you ask for the most 2 similar cat in terms of size?</p>
+<pre><code class="sql language-sql">SELECT * FROM cats ORDER BY size</code></pre>
+<p>If you identify a cat and then find the most closer to it (index ±1) then you were to identify the cats closer to it.</p>
+<p>But well, you need to order the entire database in order to do that. It's easy on this table since it has only 6 elements but imagine working on billions of cats. That will simply won't work, as this operation is O(n).</p>
+<p>Another way of doing this is as follows:</p>
+<pre><code class="sql language-sql">-- assuming that cat_size, and cat_id is our target
+SELECT * from cats WHERE size &gt;= cat_size AND id IS NOT cat_id ORDER BY size LIMIT(1)
+-- assuming that cat_size, and cat_id is our target
+SELECT * from cats WHERE size &lt;= cat_size AND id IS NOT cat_id ORDER BY size LIMIT(1)</code></pre>
+<p>And this will return the most "similar" cat in terms of size, which could be one of the two performed queries, still being O(n).</p>
+<p>If we were to simplify this query, then we should compute the differennce between cat sizes for all cats regarding to a single one and then, query over that value, but doing so will involve O(n) on computing the differences and will only work on one cat. If we were to solve this in a faster way, then in a naive way we should compute this value for all cats and waste O(n^2) space.</p>
+</div>
+
+    </div>
+  </div>
+</body>
+</html>
