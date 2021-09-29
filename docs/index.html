@@ -8,58 +8,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p&amp;subset=japanese" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/idea.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  <!-- <script src="main.js"></script> -->
+  <link rel="stylesheet" type="text/css" media="screen" href="./main.css" />
+  <script src="https://cdn.rawgit.com/bradley/Blotter/master/build/blotter.min.js"></script>
+  <script src="https://rawgit.com/bradley/Blotter/master/build/materials/channelSplitMaterial.js"></script>
+  
+  <script type="text/javascript">
+    function why(){
+      const content = document.getElementById("why");
+      const body = document.getElementById("main");
+      body.classList.toggle("why");
+      content.classList.add("why");
+      content.classList.remove("pointer");
+      content.innerHTML = "" +
+        '<br>' +
+        'primera línea del coro de mi canción favorita, ascii, en minúsculas, sin comas ni puntos' +
+        '<br>' +
+        '<br>' +
+        '<br>' +
+        'message.enc:<br>' +
+        '<br>' +
+        'U2FsdGVkX1/jzS2jqtpOORhNVmZCaYAYmc1pnw9NDRxv2Yzfm+h1OLc3wcUbpi8ozE8GftJhFwmO<br>' +
+        'kX9dlzJW3q2WZ2KM7c8bZHK5TLnEXSfNNG3inJk/umj72nJhdPnBhTqlquXv85bn3z2F/o14af7S<br>' +
+        'O/colcVD0WFkKG8N3wLAeq1G2/Dfnd9UwOwNSLdGNc0lWMUp1BIWUnb9WdHpW0nSRqz94rbIL/cj<br>' +
+        'KlQeFYMyw5XdlqZAd3JSOLKGm3l+LGmQ3MX/Uwn+RFMZX95bgwORAWsW1nKVPTi8qwOqTSmJ9em+<br>' +
+        '0/y0BlUfA5C0zl0ZHkvwhAKmr9moJkWFZyU9PAn2MSdwr2UMXrQaWVkkMUUe5yY7IgR+T0rtBxX3<br>' +
+        'Q2EdPhByRctS+fIBYZxQJ+AeQctSwjRI8XNf8DxcLWqmD5XZK5nv7Yh9PWCFN7jHtOMTU8BOxGjP<br>' +
+        'HwCtHIPNCR/2dLCO2MpvT08G+nGdz7l0ZLMYueukH+RtSzMdK1uvn47OpKHgzcVa5xDDLAVBNscJ<br>' +
+        'SKMRO27AnH4p262FLJItWQ/y3tCvhiC0kSRnFRXgEjk0RGU0d652HLL6KUhYD0hGQLJXwSCeyuDG<br>' +
+        'Ny533m3vNjT4P7uxdDvByYFQCATSCjIHWzpWFP9eQ+llE33y62lzdIoxk/BAP8OLcsF51Wzg6Hpi<br>' +
+        '75tKL7ntbJiQxilyXH4qXwYCNKCZGGnhYhZgmgB5bSeD8vMRZ6lt6WBBR2tZZTe1t0rdQPOEM+xv<br>' +
+        'NvjdZK78onfkmzQa+oay3rI1IXAM70aiV2G745DNeSohcf0FCZSgiYoO82ZjYTi0DhsWlph5A0HE<br>' +
+        'oIRonK0eLQ1q8nayZIyqA9N4Nao9hnmRZBGmxDeqoVEAexOrjsP8wMrYR1ZZ8qi52mbEV4VNNGdQ<br>' +
+        'JzWYyhvss9Av0L8COrI68hFMiSsQ0zFOH+KttvLYCJ0saN8h8KbM6B6SCAdYM4nRl+bu7Q1lcdrB<br>' +
+        '6U90guuH1dpig2vMlRpOX7Cp8Pzi8SNoyUn/x2NFuOvDgENJrX65kxFJoRXdjwWosBalwrVXnRdc<br>' +
+        '6Vby4dUTFsuZpzhl98qzxlaXPV4amgpjIANDzMl/p+GMQdXaQKHM4NvZpcyKN6Sugl4=<br>' +
+        '<br>' +
+        '<br>' +
+        '<br>' +
+        'base64 -d message.enc | openssl enc -d -aes-256-cbc -pass pass:"THE_PASSWORD";' +
+        '<br>' +
+        '<br>'
+    }
+  </script>
 </head>
 
-<body>
-  <div class="title">
-    mimashita.moe
-  </div>
-  <div class="sidebar">
-      <a class="link" href="/">
-        <div class="sidebar-item item">
-          Home
-        </div>
-      </a>
-      <a class="link" href="/links.html">
-        <div class="sidebar-item item">
-          Links
-        </div>
-      </a>
-      <a class="link" href="/about.html">
-        <div class="sidebar-item item">
-          About
-        </div>
-      </a>
-      <a class="link" href="https://2v30khz.wordpress.com/">
-        <div class="sidebar-item item">
-          Blog
-        </div>
-      </a>
-      <a class="link" href="/translation.html">
-        <div class="sidebar-item item">
-          TL Blog (still migrating)
-        </div>
-      </a>
-      <a class="link" href="/dev.html">
-        <div class="sidebar-item item">
-          Dev Blog (paused)
-        </div>
-      </a>
-  </div>
-  <div class="content markdown-body">
-    <div class="entry">
-      <h1 id="welcome-to-mimashitamoe">Welcome to mimashita.moe</h1>
-<p>I'm KuKy. I'm still building this thing...</p>
-<p>You can check more info about me if you click on <a href="/about.html">about</a>. There are some <a href="/links.html">links</a> on where you can find some resources that I often visit on the web. </p>
-<p>I do also have some blogs which I'm unifying, but it will take some time. Meanwhile, this site is still under construction, so be patient.</p>
-<hr />
-<p>There are more stuff to be told, but I'll be doing it in due time.</p>
+<body id="main">
+  <div class="centered">
+    <div class="text-content pointer" id="why" onclick="why()">
+      There is "nothing" here.
     </div>
   </div>
+  
 </body>
 </html>
