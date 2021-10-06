@@ -28,7 +28,7 @@ const blogMutex = new Mutex();
 const translationMutex = new Mutex();
 const developmentMutex = new Mutex();
 
-fsExtra.removeSync(buildFolder);
+// fsExtra.removeSync(buildFolder);
 fsExtra.ensureDirSync(buildFolder);
 
 var scan_directory = function (folder, root) {
@@ -334,7 +334,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('webserver', function() {
-    gulp.src('./build')
+    gulp.src('./docs')
     .pipe(server({
         defaultFile: 'index.html',
         livereload : true
