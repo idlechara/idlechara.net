@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US" style="height: 100%;">
+
+<head>
+    <title>YOROKOBE SHONEN!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+</head>
+
+<body>
+    <div class="nekoi_center">
+        <div class="nekoi_container wide1000">
+            <div class="nekoi_title"><b>Yorokobe Shonen !</b></div>
+            <div class="content">
+                Not too long ago (August 14th - 2017) talking with <a href="https://twitter.com/cryofrzd">@cryofrzd</a> about ideas for my thesis project we came across multiple uses
+                for the phrase "Yorokobe shonen" (喜べ少年), which is commonly said by Kotomine Kirei (Fate Series). This phrase can be translated as <i>"Rejoice, my boy"</i> with an air that express some kind of relief because you're on the
+                right path. So we joked around common phrases (and mistakes) which coders do. The phrases are as follows:
+                
+                <br><br>
+                
+                <br><br> <b>Yorokobe Shonen</b>, we don't do include guards, cause we never include twice.
+
+                <br><br> <b>Yorokobe Shonen</b>, we follow the mathematical notation when writing functions, the variables are x, y, z, X, Y, Z,
+                xprime, yprime, dYdx etc. If the variable isn't passed in the math notation, it's passed by being a global variable.
+
+                <br><br> <b>Yorokobe Shonen</b>, we include Object Relational Mappers only to use bare SQL sentences to get the data.
+                <br><br> <b>Yorokobe Shonen</b>, we import Apache, to read a file to a string.
+                <br><br> <b>Yorokobe Shonen</b>, we raise a web service for a standalone desktop application.
+                <br><br> <b>Yorokobe Shonen</b>, What do you mean closing pipes/files/exiting processes?
+                <br><br> <b>Yorokobe Shonen</b>, there is nothing wrong with stray pointers.
+                <br><br> <b>Yorokobe Shonen</b>, import/include compiletime/preprocesor instructions resolve loops automatically so you dont need to check them.
+                <br><br> <b>Yorokobe Shonen</b>, extern function declaration without a makefile. i.e. no header file.
+                <br><br> <b>Yorokobe Shonen</b>, more threads -> more speed.
+                <br><br> <b>Yorokobe Shonen</b>, A thread per row in matrix multiplication with channels to get the column.
+                <br><br> <b>Yorokobe Shonen</b>, Threads are lightweight.
+                <br><br> <b>Yorokobe Shonen</b>, Processes instead of threads.
+                <br><br> <b>Yorokobe Shonen</b>, Using text files as FIFO to communicate two processes.
+                <br><br> <b>Yorokobe Shonen</b>, the more forks on the plates the better, my concurency policy.
+                <br><br> <b>Yorokobe Shonen</b>, A thread per row in matrix multiplication with channels to get the column.
+
+                <br><br><br><br><center><img src="yorokobe_shonen.jpg" /></center>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    var elem = document.querySelector('.nekoi_center');
+    var msnry = new Masonry( elem, {
+    itemSelector: '.nekoi_container',
+    fitWidth: true
+    });
+    var msnry = new Masonry( '.nekoi_center', {
+    });
+    setTimeout(function(){ msnry.layout(); }, 200);
+</script>
+
+</html>
