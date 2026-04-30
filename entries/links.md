@@ -1,10 +1,16 @@
+---
+title: There are some links for you
+hidden: true
+---
 [//]: # (Sat Aug 25 03:37:29 -03 2018)
 # There are some links for you
 
 ## Personal
 
-* [Twitter!](https://twitter.com/2V30KHz_)
-* [Soundcloud](https://soundcloud.com/kukynekoi/) - I have some old and lame remixes there
-* [Last.fm](https://www.last.fm/es/user/kuky_nekoi) - To peek on what I listen to
-* [Retrospring](https://retrospring.net/2V30KHz_) - You can ask whatever you want thereto know what I'm currently watching/reading  -->
+* [Soundcloud](https://soundcloud.com/kukynekoi/) - old & lame remixes
+* [Last.fm](https://www.last.fm/es/user/kuky_nekoi) - what i listen to
+* [Retrospring](https://retrospring.net/2V30KHz_) - ask me stuff
+* [GitHub](https://github.com/idlechara) - idlechara
+* [Bluesky](https://bsky.app/profile/idlechara.bsky.social) - idlechara
+* [Discord](https://discord.com/users/idlechara) - idlechara
 

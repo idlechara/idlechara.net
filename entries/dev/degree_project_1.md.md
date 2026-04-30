@@ -1,3 +1,10 @@
+---
+title: "Degree project pt. 1"
+date: Tue Jan 08 2019
+tag: dev
+slug: degree_project_1
+excerpt: Reviving my old FPGA-accelerated metric space index project after it got shelved by the CS department.
+---
 [//]: # (Tue Jan 8 16:18:22 -03 2019)
 # Degree project pt. 1
 

@@ -1,3 +1,3 @@
-# Welcome to mimashita.moe
+# Welcome to idlechara.moe
 
-Nekoi here.
+Eri here.

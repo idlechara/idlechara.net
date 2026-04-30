@@ -1,3 +1,10 @@
+---
+title: Turning an AC1750 router into a homemade Time Capsule
+date: Mon Jan 28 2019
+tag: dev
+slug: timecapsule
+excerpt: "You have a Mac but don't have enough money to afford a Time Capsule? Use a router, install OpenWRT, profit."
+---
 [//]: # (Mon Jan 28 19:31:31 -03 2019)
 # Turning an AC1750 router into a homemade timecapsule
 

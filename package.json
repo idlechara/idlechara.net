@@ -1,33 +1,21 @@
 {
-  "name": "kuni",
-  "version": "1.0.0",
-  "description": "A small microblogging framework to deploy static blogs",
-  "main": "gulpfile.js",
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-server-livereload": "^1.9.2",
-    "gulp-less": "^4.0.1",
-    "gulp-livereload": "^3.8.1",
-    "async-mutex": "^0.1.3",
-    "fs-extra": "^7.0.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-replace": "^1.0.0",
-    "gulp-sass": "^4.0.1",
-    "node-mutex": "^0.2.2",
-    "showdown": "^1.8.6"
-  },
+  "name": "idlechara-moe",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp default"
+    "build-posts": "node scripts/build-posts.js",
+    "dev": "node scripts/build-posts.js && vite",
+    "build": "node scripts/build-posts.js && vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KukyNekoi/kuni.git"
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
-  "author": "KuKy_NeKoi",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KukyNekoi/kuni/issues"
-  },
-  "homepage": "https://github.com/KukyNekoi/kuni#readme"
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "gray-matter": "^4.0.3",
+    "marked": "^12.0.0",
+    "vite": "^5.4.0"
+  }
 }

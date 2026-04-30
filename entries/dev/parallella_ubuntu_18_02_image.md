@@ -1,3 +1,9 @@
+---
+title: "Parabuntu, updated to 18.04 (with download link)"
+date: Sun Mar 24 2019
+tag: dev
+excerpt: How to upgrade your old Parabuntu image to Ubuntu 18.04 on the Parallella board.
+---
 [//]: # (sun mar 24 21:06:07 -03 2019)
 # Parabuntu, updated to 18.04 (with download link)
 

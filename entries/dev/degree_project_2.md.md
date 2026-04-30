@@ -1,3 +1,10 @@
+---
+title: "Degree project pt. 2 — Setting up your environment on macOS"
+date: Tue Jan 08 2019
+tag: dev
+slug: degree_project_2
+excerpt: Required tools to start developing the first implementation of our metric index on macOS.
+---
 [//]: # (Tue Jan 8 18:20:38 -03 2019)
 # Degree project pt. 2 - Setting up your environment with OSX with some basic
 

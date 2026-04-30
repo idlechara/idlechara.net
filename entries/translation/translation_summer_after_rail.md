@@ -1,3 +1,10 @@
+---
+title: "aran — Sunny After Rain feat. Kanata.N"
+date: Mon Aug 27 2018
+tag: tl
+slug: summer_after_rain
+excerpt: "Sunny After Rain feat. Kanata.N — translation, romaji and Spanish."
+---
 [//]: # (Mon Aug 27 02:59:12 -03 2018)
 # aran - Sunny After Rain feat. Kanata.N
 

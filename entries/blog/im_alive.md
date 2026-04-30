@@ -1,3 +1,10 @@
+---
+title: I'm alive
+date: Sat Aug 25 2018
+tag: life
+hidden: true
+excerpt: Yeah boi, I've actually returned to this space and I'll be posting some things here from now on.
+---
 [//]: # (Sat Aug 25 03:37:29 -03 2018)
 # I'm alive
 

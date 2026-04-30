@@ -1,3 +1,10 @@
+---
+title: "Chata — Gitai To Shoudou (擬態と衝動)"
+date: Mon Sep 01 2018
+tag: tl
+slug: gitai_to_shoudou
+excerpt: "擬態と衝動 — Japanese, romaji and Spanish translation, with translator's notes."
+---
 [//]: # (Mon Sep 01 00:02:32 -03 2018)
 # Chata - Gitai To Shoudou
 

@@ -1,3 +1,10 @@
+---
+title: "Degree project pt. 3 — Metric space indexing explained (WIP)"
+date: Tue Jan 08 2019
+tag: dev
+slug: degree_project_3
+excerpt: The fundamentals of how metric spaces and similarity search actually work.
+---
 [//]: # (Tue Jan 8 19:22:38 -03 2019)
 # Degree project pt. 3 - Metric space indexing explained (WIP)
 

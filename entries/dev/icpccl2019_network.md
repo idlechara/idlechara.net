@@ -1,3 +1,9 @@
+---
+title: Fallback Network Topology used on ICPC Chile 2019
+date: Sun Nov 17 2019
+tag: dev
+excerpt: A brief introduction on how fallback networking works for ICPC Chile 2019.
+---
 [//]: # (dom nov 17 19:40:05 -03 2019)
 # Fallback Network Topology used on ICPC Chile 2019
 
