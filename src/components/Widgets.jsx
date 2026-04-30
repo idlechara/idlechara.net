@@ -11,7 +11,7 @@ export function NowListening() {
     if (!LASTFM_USERNAME) return;
     const loadTracks = async () => {
       try {
-        const res = await fetch('/nowplaying.json');
+        const res = await fetch(`${import.meta.env.BASE_URL}nowplaying.json`);
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data) && data.length > 0) {
