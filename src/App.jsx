@@ -20,6 +20,7 @@ const TWEAK_DEFAULTS = {
   palette: 'pastel-rainbow',
   showSparkles: true,
   showMarquee: true,
+  contentWidth: 1600,
 };
 
 export function App() {
@@ -34,7 +35,7 @@ export function App() {
       {tweaks.showSparkles && <ClickSparkles />}
       <Lightbox />
 
-      <div className="app">
+      <div className="app" style={{ '--content-max-width': `${tweaks.contentWidth}px` }}>
         <TitleBar />
         <div className="layout">
           <Sidebar route={route} go={go} />
@@ -55,6 +56,8 @@ export function App() {
       </button>
 
       <TweaksPanel open={tweaksOpen} onClose={() => setTweaksOpen(false)}>
+        <TweakSection label="Layout" />
+        <TweakSlider label="Content width" value={tweaks.contentWidth} min={900} max={2200} step={50} unit="px" onChange={(v) => setTweak('contentWidth', v)} />
         <TweakSection label="Background stars" />
         <TweakSlider label="Star count"  value={tweaks.starCount} min={20} max={220} step={10} onChange={(v) => setTweak('starCount', v)} />
         <TweakSlider label="Drift speed" value={tweaks.starSpeed} min={0.3} max={3} step={0.1} onChange={(v) => setTweak('starSpeed', v)} />

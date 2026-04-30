@@ -1,7 +1,22 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 
+const TWEAKS_STORAGE_KEY = 'idlechara.tweaks';
+
 export function useTweaks(defaults) {
-  const [values, setValues] = useState(defaults);
+  const [values, setValues] = useState(() => {
+    try {
+      const stored = localStorage.getItem(TWEAKS_STORAGE_KEY);
+      if (stored) return { ...defaults, ...JSON.parse(stored) };
+    } catch (_) { /* ignore quota / privacy mode */ }
+    return defaults;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(TWEAKS_STORAGE_KEY, JSON.stringify(values));
+    } catch (_) { /* ignore */ }
+  }, [values]);
+
   const setTweak = useCallback((keyOrEdits, val) => {
     const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
       ? keyOrEdits : { [keyOrEdits]: val };

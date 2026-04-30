@@ -140,7 +140,8 @@ Español <br>
 <br>y su sombra en mis ojos se quemará
 </div>
 </div>
-<br> <br> <br> 
+<br> <br> <br>
+
 * [1]: Si bien se traduce como "Mirando a un montón de caras desconocidas", es posible interpretarlo como si la mirada enfrentase a la de los demás.
 
 * [2]: En este caso, la interpretación de la risa tiene cierto nivel de sarcasmo. Puede ser porque la alegría y el dolor son dos emociones que son bastante cercanas entre sí, la intensidad de esta hace que sean confundidas.

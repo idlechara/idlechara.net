@@ -16,6 +16,7 @@
   --ink-soft: #4d4178;
   --border: #c9bfe6;
   --content-bg: #fffaf0;
+  --content-max-width: 1600px;
 }
 
 * { box-sizing: border-box; }
@@ -98,7 +99,7 @@ body::before {
 .app {
   position: relative;
   z-index: 1;
-  max-width: 1400px;
+  max-width: var(--content-max-width, 1600px);
   margin: 0 auto;
   padding: 36px 40px 80px;
 }
@@ -491,6 +492,35 @@ main { min-width: 0; }
   font-size: 13px;
   position: relative;
 }
+.now-listening-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+.now-listening-slide {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(.22,.9,.3,1);
+  animation-fill-mode: both;
+}
+.now-listening-slide.slide-next { animation-name: nlSlideNext; }
+.now-listening-slide.slide-prev { animation-name: nlSlidePrev; }
+@keyframes nlSlideNext {
+  0%   { transform: translateX(28px); opacity: 0; }
+  100% { transform: translateX(0);    opacity: 1; }
+}
+@keyframes nlSlidePrev {
+  0%   { transform: translateX(-28px); opacity: 0; }
+  100% { transform: translateX(0);     opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .now-listening-slide { animation: none; }
+}
 .now-listening .label {
   font-weight: 800;
   letter-spacing: 2px;
@@ -770,17 +800,22 @@ main { min-width: 0; }
 }
 
 /* ---------- TRANSLATION GRID (lyrics columns) ---------- */
+.translation-container,
 .translation-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
   margin: 22px 0;
+  align-items: stretch;
 }
 .translation-grid.three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 900px) {
+  .translation-container,
   .translation-grid,
   .translation-grid.three-col { grid-template-columns: 1fr; }
 }
+.translation-container > .translation,
+.translation-container > .translation-spanish,
 .translation-col {
   background: var(--lavender);
   border: 2px solid var(--ink);
@@ -789,8 +824,13 @@ main { min-width: 0; }
   box-shadow: 3px 3px 0 var(--periwinkle-shadow);
   font-size: 13px;
   line-height: 1.65;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-.translation-col h3 {
+.translation-col h3,
+.translation-container > .translation h3,
+.translation-container > .translation-spanish h3 {
   margin: 0 0 10px 0;
   color: var(--pink-deep);
   font-size: 15px;

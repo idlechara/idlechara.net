@@ -5,6 +5,7 @@
   "scripts": {
     "build-posts": "node scripts/build-posts.js",
     "dev": "node scripts/build-posts.js && vite",
+    "dev:offline": "SKIP_LASTFM=1 node scripts/build-posts.js && vite",
     "build": "node scripts/build-posts.js && vite build",
     "preview": "vite preview"
   },

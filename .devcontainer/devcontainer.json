@@ -1,0 +1,42 @@
+{
+  "name": "idlechara.moe",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [5173, 4173],
+  "portsAttributes": {
+    "5173": {
+      "label": "Vite dev server",
+      "onAutoForward": "openPreview"
+    },
+    "4173": {
+      "label": "Vite preview",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "npm install",
+  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  "remoteUser": "node",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "yzhang.markdown-all-in-one",
+        "GitHub.vscode-github-actions",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "editor.formatOnSave": false,
+        "editor.tabSize": 2,
+        "files.eol": "\n",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "mounts": [
+    "source=idlechara-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ]
+}

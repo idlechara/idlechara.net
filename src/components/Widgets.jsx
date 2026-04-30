@@ -1,55 +1,120 @@
 import { useState, useEffect } from 'react';
 import { WEBRING_SITES } from '../data/webring.js';
-import { LASTFM_USERNAME, LASTFM_API_KEY } from '../data/music.js';
+import { LASTFM_USERNAME } from '../data/music.js';
 
-export function NowListening({ track = 'citypop mix vol.04', artist = 'drifting around at 2v30khz' }) {
-  const [music, setMusic] = useState({ track, artist, loading: false });
-
-  const isConfigured = LASTFM_USERNAME && LASTFM_API_KEY && LASTFM_API_KEY !== '5a2b77b7dc8b5c5b7b6d5d5c1f5b5f5d';
-  if (!isConfigured) return null;
+export function NowListening() {
+  const [tracks, setTracks] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState('next');
 
   useEffect(() => {
-    const fetchNowPlaying = async () => {
-      setMusic(prev => ({ ...prev, loading: true }));
+    if (!LASTFM_USERNAME) return;
+    const loadTracks = async () => {
       try {
-        const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&limit=1&format=json`;
-        console.log('Fetching from:', url);
-        const res = await fetch(url);
-        const data = await res.json();
-        console.log('Last.fm response:', data);
-
-        if (data.recenttracks?.track) {
-          const t = data.recenttracks.track;
-          const trackName = t.name || 'Unknown Track';
-          const artistName = typeof t.artist === 'string' ? t.artist : (t.artist?.name || 'Unknown Artist');
-
-          console.log('Track:', trackName, 'Artist:', artistName);
-          setMusic({
-            track: trackName,
-            artist: artistName,
-            loading: false
-          });
-        } else {
-          console.warn('No recent tracks found in response');
-          setMusic(prev => ({ ...prev, loading: false }));
+        const res = await fetch('/nowplaying.json');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setTracks(data);
+          }
         }
       } catch (e) {
-        console.error('Failed to fetch last.fm:', e);
-        setMusic(prev => ({ ...prev, loading: false }));
+        console.warn('No now playing data found');
       }
     };
 
-    fetchNowPlaying();
-    const interval = setInterval(fetchNowPlaying, 30000);
-    return () => clearInterval(interval);
+    loadTracks();
   }, []);
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    if (tracks.length === 0) return;
+
+    const interval = setInterval(() => {
+      setDirection('next');
+      setCurrentIndex((prev) => (prev + 1) % tracks.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [tracks.length]);
+
+  if (!LASTFM_USERNAME) return null;
+  if (tracks.length === 0) return null;
+
+  // Safety check for current track
+  const currentTrack = tracks[currentIndex];
+  if (!currentTrack) return null;
+
+  const handlePrev = (e) => {
+    e.preventDefault();
+    setDirection('prev');
+    setCurrentIndex((prev) => (prev - 1 + tracks.length) % tracks.length);
+  };
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    setDirection('next');
+    setCurrentIndex((prev) => (prev + 1) % tracks.length);
+  };
+
+  const trackName = currentTrack?.name || 'Unknown Track';
+  const artistName = currentTrack?.artist || 'Unknown Artist';
+  const imageUrl = currentTrack?.image || '';
+  const trackUrl = currentTrack?.url || '#';
+  const timestamp = currentTrack?.timestamp ? new Date(currentTrack.timestamp).toLocaleDateString() : '';
+
+  const openTrack = (e) => {
+    e.preventDefault();
+    window.open(trackUrl, '_blank');
+  };
 
   return (
     <div className="now-listening">
       <div className="label">★ now spinning</div>
-      <div>
-        <span className="eq"><span /><span /><span /><span /></span>
-        <b>{music.track}</b> — {music.artist}
+      <div className="now-listening-track">
+        <button onClick={handlePrev} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, flexShrink: 0, padding: 0 }}>‹</button>
+
+        <div
+          key={currentIndex}
+          className={`now-listening-slide ${direction === 'next' ? 'slide-next' : 'slide-prev'}`}
+        >
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt={trackName}
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: 4,
+                objectFit: 'cover',
+                flexShrink: 0,
+                cursor: 'pointer',
+              }}
+              onClick={openTrack}
+              onError={(e) => {
+                e.target.style.display = 'none';
+              }}
+            />
+          )}
+
+          <div style={{ flex: 1, minWidth: 0, cursor: 'pointer' }} onClick={openTrack}>
+            <span className="eq"><span /><span /><span /><span /></span>
+            <b style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{trackName}</b>
+            <div style={{ fontSize: 12, color: 'var(--ink-soft)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {artistName}
+            </div>
+            <div style={{ fontSize: 10, color: 'var(--ink-soft)', marginTop: 4 }}>
+              {currentIndex + 1} / {tracks.length}
+            </div>
+            {timestamp && (
+              <div style={{ fontSize: 9, color: 'var(--ink-soft)', marginTop: 2 }}>
+                {timestamp}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <button onClick={handleNext} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, flexShrink: 0, padding: 0 }}>›</button>
       </div>
     </div>
   );

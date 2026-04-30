@@ -1,10 +1,25 @@
 #!/usr/bin/env node
-// build-posts.js — reads entries/*.md → src/data/posts.json + copies images
+// build-posts.js — reads entries/*.md → src/data/posts.json + copies images + fetches last.fm tracks
 
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
+
+// Load config
+const configPath = path.resolve(import.meta.dirname, '..', 'src', 'data', 'music.js');
+let LASTFM_USERNAME = '';
+let LASTFM_API_KEY = '';
+
+try {
+  const configContent = fs.readFileSync(configPath, 'utf8');
+  const usernameMatch = configContent.match(/LASTFM_USERNAME\s*=\s*['"]([^'"]+)['"]/);
+  const apiKeyMatch = configContent.match(/LASTFM_API_KEY\s*=\s*['"]([^'"]+)['"]/);
+  if (usernameMatch) LASTFM_USERNAME = usernameMatch[1];
+  if (apiKeyMatch) LASTFM_API_KEY = apiKeyMatch[1];
+} catch (e) {
+  console.warn('Could not load last.fm config');
+}
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const ENTRIES_DIR = path.join(ROOT, 'entries');
@@ -166,23 +181,157 @@ function processAbout() {
   console.log('  [ok] about.html');
 }
 
-console.log('Building posts...');
-fs.mkdirSync(path.dirname(OUT_JSON), { recursive: true });
-fs.mkdirSync(PUBLIC_ASSETS, { recursive: true });
+async function fetchWithRetry(url, maxRetries = 3) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        },
+      });
 
-const allPosts = [];
-for (const [dir, key] of Object.entries(SECTION_MAP)) {
-  console.log(`\nSection: ${dir}`);
-  allPosts.push(...processSection(path.join(ENTRIES_DIR, dir), key));
+      // Retry on 600 errors (Nginx errors)
+      if (res.status === 600 && attempt < maxRetries - 1) {
+        // Exponential backoff with jitter: 2^attempt * 1000ms + random jitter
+        const baseDelay = Math.pow(2, attempt) * 1000;
+        const jitter = Math.random() * 1000;
+        const delay = baseDelay + jitter;
+        console.log(`  [retry] last.fm returned 600, waiting ${Math.round(delay)}ms before retry ${attempt + 1}/${maxRetries - 1}`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+
+      return res;
+    } catch (e) {
+      if (attempt < maxRetries - 1) {
+        const baseDelay = Math.pow(2, attempt) * 1000;
+        const jitter = Math.random() * 1000;
+        const delay = baseDelay + jitter;
+        console.log(`  [retry] fetch failed, waiting ${Math.round(delay)}ms before retry ${attempt + 1}/${maxRetries - 1}`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      throw e;
+    }
+  }
 }
 
-// sort descending by date
-allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+async function buildNowPlaying() {
+  if (process.env.SKIP_LASTFM) {
+    console.log('Skipping last.fm fetch — SKIP_LASTFM set');
+    return;
+  }
+  if (!LASTFM_USERNAME) {
+    console.log('Skipping last.fm fetch — no username configured');
+    return;
+  }
 
-fs.writeFileSync(OUT_JSON, JSON.stringify(allPosts, null, 2), 'utf8');
-console.log(`\nWrote ${allPosts.length} posts → src/data/posts.json`);
+  try {
+    const url = `https://www.last.fm/user/${LASTFM_USERNAME}`;
+    console.log(`Fetching last.fm tracks for ${LASTFM_USERNAME}...`);
+    const res = await fetchWithRetry(url);
 
-console.log('\nBuilding about page...');
-processAbout();
+    if (!res.ok) {
+      console.warn(`  [warn] last.fm returned ${res.status}`);
+      return;
+    }
 
-console.log('\nDone.');
+    const html = await res.text();
+
+    const tracks = [];
+    const seen = new Set();
+
+    // Split HTML by chartlist rows and process each one
+    const rowPattern = /<tr[^>]*class="[^"]*chartlist-row[^"]*"[^>]*>[\s\S]*?<\/tr>/g;
+    let rowMatch;
+
+    while ((rowMatch = rowPattern.exec(html)) !== null && tracks.length < 50) {
+      const rowHtml = rowMatch[0];
+
+      // Extract image from this row
+      const imgMatch = rowHtml.match(/src="([^"]*lastfm[^"]*\/i\/u\/(?:34s|64s|174s|226s)\/[^"]+?)"/);
+      const image = imgMatch ? imgMatch[1] : '';
+
+      // Timestamp: prefer the unix epoch on the <tr data-timestamp="..."> itself,
+      // fall back to the chartlist-timestamp <span title="..."> human-readable form.
+      const epochMatch = rowHtml.match(/data-timestamp="(\d+)"/);
+      const titleMatch = rowHtml.match(/chartlist-timestamp[\s\S]*?<span\s+title="([^"]+)"/);
+      let timestamp;
+      if (epochMatch) {
+        timestamp = new Date(Number(epochMatch[1]) * 1000).toISOString();
+      } else if (titleMatch) {
+        timestamp = titleMatch[1];
+      } else {
+        timestamp = '';
+      }
+
+      // Extract track info - handle multi-line href attributes
+      // Match: href="/music/{artist}/_/{track}" with possible newlines/spaces between attributes
+      const trackMatch = rowHtml.match(/href="([^"]*?\/music\/([^"]+?)\/_\/([^"]+?))"[\s\S]*?title="([^"]*)"[\s\S]*?<\/a>/);
+
+      if (trackMatch) {
+        const fullUrl = trackMatch[1];
+        const artist = decodeURIComponent(trackMatch[2]);
+        const trackFromUrl = decodeURIComponent(trackMatch[3]);
+        const trackName = trackMatch[4] || trackFromUrl;
+
+        const key = `${artist}|${trackName}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          tracks.push({
+            name: trackName,
+            artist: artist,
+            url: fullUrl.startsWith('http') ? fullUrl : `https://www.last.fm${fullUrl}`,
+            image: image,
+            timestamp: timestamp,
+          });
+        }
+      }
+    }
+
+    if (tracks.length > 0) {
+      const publicPath = path.join(ROOT, 'public', 'nowplaying.json');
+      fs.writeFileSync(publicPath, JSON.stringify(tracks, null, 2), 'utf8');
+      console.log(`  [ok] fetched ${tracks.length} tracks from last.fm`);
+    } else {
+      // Loud warning: scraping is structurally fragile. If this fires repeatedly,
+      // last.fm changed their markup and rowPattern / track regex needs updating.
+      console.warn('  [WARN] last.fm scrape returned 0 tracks — HTML structure may have changed');
+      console.warn('         existing public/nowplaying.json (if any) is preserved');
+    }
+  } catch (e) {
+    console.warn('  [WARN] last.fm scrape failed:', e.message);
+    console.warn('         existing public/nowplaying.json (if any) is preserved');
+  }
+}
+
+async function main() {
+  console.log('Building posts...');
+  fs.mkdirSync(path.dirname(OUT_JSON), { recursive: true });
+  fs.mkdirSync(PUBLIC_ASSETS, { recursive: true });
+
+  const allPosts = [];
+  for (const [dir, key] of Object.entries(SECTION_MAP)) {
+    console.log(`\nSection: ${dir}`);
+    allPosts.push(...processSection(path.join(ENTRIES_DIR, dir), key));
+  }
+
+  // sort descending by date
+  allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  fs.writeFileSync(OUT_JSON, JSON.stringify(allPosts, null, 2), 'utf8');
+  console.log(`\nWrote ${allPosts.length} posts → src/data/posts.json`);
+
+  console.log('\nBuilding about page...');
+  processAbout();
+
+  console.log('\nFetching now playing...');
+  await buildNowPlaying();
+
+  console.log('\nDone.');
+}
+
+main().catch(err => {
+  console.error('Build failed:', err);
+  process.exit(1);
+});
