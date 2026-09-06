@@ -5,7 +5,7 @@ on:
     branches: [main, master]
   workflow_dispatch:
   schedule:
-    - cron: '0 4 * * *'  # 00:00 America/Santiago (CLT, UTC-4); 01:00 during CLST
+    - cron: '0 4 */3 * *'  # every 3 days at 00:00 America/Santiago (CLT, UTC-4); 01:00 during CLST
 
 permissions:
   contents: read
