@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(SKIP_LASTFM=1 timeout 8 npx vite build)"
     ]
   }
 }

@@ -1,22 +1,24 @@
-/* idlechara.moe — 90s pastel rebuild
-   Periwinkle dream, cream content cards, kawaii stars. */
+/* idlechara.moe — Windows 95 full-send rebuild
+   Teal desktop, silver chrome, chiseled borders, hot links. */
 
 :root {
-  --periwinkle: #7d6ec0;
-  --periwinkle-deep: #6a5aa8;
-  --periwinkle-shadow: #5a4a92;
-  --cream: #fffaf0;
-  --mint: #dffff5;
-  --pink: #ffd6e7;
-  --pink-deep: #ec84b3;
-  --lemon: #fff8a8;
-  --sky: #bce3f5;
-  --lavender: #e7defb;
-  --ink: #2b2247;
-  --ink-soft: #4d4178;
-  --border: #c9bfe6;
-  --content-bg: #fffaf0;
+  --periwinkle: #008080;         /* teal desktop bg */
+  --periwinkle-deep: #000080;    /* navy — titles, active nav */
+  --periwinkle-shadow: #000000;  /* hard black block shadow */
+  --cream: #c0c0c0;              /* silver chrome */
+  --mint: #c0c0c0;               /* silver — now-listening panel */
+  --pink: #ffff00;               /* yellow — tab badges */
+  --pink-deep: #ff0000;          /* red — accents, sparkles */
+  --lemon: #ffff00;              /* yellow — info card */
+  --sky: #00ffff;                /* cyan — dev tag */
+  --lavender: #c0c0c0;           /* silver — panels, code inline */
+  --ink: #000000;
+  --ink-soft: #404040;
+  --border: #808080;             /* mid gray chrome edge */
+  --content-bg: #ffffff;         /* white paper reading surface */
   --content-max-width: 1600px;
+  --link: #0000ee;
+  --link-visited: #551a8b;
 }
 
 * { box-sizing: border-box; }
@@ -1094,3 +1096,393 @@ ul.footnotes b { color: var(--pink-deep); }
   60%  { opacity: 1; }
   100% { transform: translate(calc(-50% + var(--ex)), calc(-50% + var(--ey))) rotate(var(--rot))   scale(0.1); opacity: 0; }
 }
+
+/* ============================================================
+   WIN95 FULL-SEND OVERRIDES
+   Kill rounded corners, add chiseled 3D chrome, hot underlined
+   links, tiled desktop background, blocky shadows.
+   ============================================================ */
+
+html, body {
+  font-family: 'MS Sans Serif', 'Tahoma', 'Anonymous Pro', monospace;
+}
+
+/* teal desktop with a subtle dithered tile */
+body {
+  background-color: #008080;
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,0.04) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.04) 75%),
+    linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.05) 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+}
+body::before { display: none; }
+
+/* squared corners everywhere */
+.sb-card, .info-card, .content-card, .blog-entry, .btn,
+.link-card, .link-card .lc-icon, .now-listening, .marquee-wrap,
+.webring, .webring .arrow, .tag, .info-card .avatar,
+.content-card table, .content-card table.song-meta,
+.content-card pre, .content-card blockquote, .content-card code,
+.translation-col, .translation-container > .translation,
+.translation-container > .translation-spanish,
+ul.footnotes, .video-embed, .visit-counter, .visit-counter span,
+.post-figure img, .content-card .post-body img,
+.post-gallery .gallery-img-wrap, .lightbox-frame, .lightbox-frame img,
+.lightbox-close, .tweaks-toggle, .sb-item, .info-card .status .dot,
+.eq span, .sb-card .sb-tab, .img-placeholder {
+  border-radius: 0 !important;
+}
+
+/* Win95 chiseled 3D chrome for panels */
+.sb-card, .info-card, .content-card, .now-listening,
+.link-card, .marquee-wrap, .webring, .video-embed,
+.translation-col, .content-card table, .content-card table.song-meta,
+.translation-container > .translation,
+.translation-container > .translation-spanish {
+  border: 2px solid;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  box-shadow:
+    inset -1px -1px 0 #808080,
+    inset 1px 1px 0 #dfdfdf,
+    4px 4px 0 #000000 !important;
+  background: var(--cream);
+}
+
+.content-card { background: var(--content-bg); }
+.now-listening { background: var(--cream); }
+
+/* title bar — Win95 window titlebar */
+.title-bar h1 {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  color: #ffffff !important;
+  padding: 4px 12px !important;
+  text-shadow: none !important;
+  font-family: 'MS Sans Serif', 'Tahoma', sans-serif;
+  font-weight: 700;
+  border: 2px solid;
+  border-color: #ffffff #404040 #404040 #ffffff;
+  box-shadow: 2px 2px 0 #000;
+}
+.title-bar h1::before, .title-bar h1::after { display: none; }
+.title-bar .tagline {
+  color: #ffff00;
+  text-shadow: 1px 1px 0 #000;
+}
+
+/* nav items — flat until hover, then inset */
+.sb-item {
+  border-radius: 0 !important;
+  transition: none;
+  padding: 4px 8px;
+}
+.sb-item:hover {
+  background: #000080 !important;
+  color: #ffff00 !important;
+  transform: none !important;
+}
+.sb-item.active {
+  background: #000080 !important;
+  color: #ffffff !important;
+  box-shadow: inset 1px 1px 0 #000, inset -1px -1px 0 #4040ff;
+}
+.sb-item .bullet { border-radius: 0 !important; }
+
+.sb-card .sb-tab {
+  background: #000080 !important;
+  color: #ffffff !important;
+  border: 2px solid;
+  border-color: #ffffff #000 #000 #ffffff !important;
+  border-radius: 0 !important;
+}
+
+/* info card — yellow sticky-note vibe */
+.info-card { background: #ffff00 !important; }
+.info-card .avatar {
+  background: #c0c0c0 !important;
+  border: 2px solid;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  animation: none;
+}
+.info-card .status .dot { background: #00ff00 !important; }
+
+/* content headings — solid navy, no gradients */
+.content-card h1 {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: #ff0000 !important;
+  font-family: 'Times New Roman', serif;
+  font-weight: 900;
+}
+.content-card h2 {
+  color: #000080 !important;
+  border-bottom: 2px solid #000 !important;
+  font-family: 'Times New Roman', serif;
+}
+.content-card h3 {
+  color: #000080 !important;
+  font-family: 'Times New Roman', serif;
+}
+
+/* HR — chiseled inset line */
+.content-card hr {
+  border: none !important;
+  height: 2px;
+  background: none !important;
+  border-top: 1px solid #808080 !important;
+  border-bottom: 1px solid #ffffff !important;
+}
+
+/* links — classic browser blue underline */
+.content-card p a,
+.content-card li a,
+.content-card h1 a,
+.content-card h2 a,
+.content-card h3 a {
+  color: var(--link) !important;
+  text-decoration: underline !important;
+  border-bottom: none !important;
+  font-weight: normal;
+}
+.content-card p a:visited,
+.content-card li a:visited { color: var(--link-visited) !important; }
+.content-card p a:hover,
+.content-card li a:hover {
+  color: #ff0000 !important;
+  background: #ffff00;
+}
+
+/* blog entries — flat silver, no gradient shimmer */
+.blog-entry {
+  background: #c0c0c0 !important;
+  border: 2px solid;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  box-shadow: 4px 4px 0 #000 !important;
+  transition: none !important;
+}
+.blog-entry::after { display: none !important; }
+.blog-entry:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0 #000 !important;
+}
+.blog-entry .timestamp {
+  color: #000080;
+  font-weight: bold;
+}
+.blog-entry .timestamp::before { color: #ff0000; }
+.blog-entry h2 { color: #000080 !important; }
+
+/* tags — flat colored pills, hard border */
+.tag {
+  border-radius: 0 !important;
+  border: 2px solid;
+  border-color: #ffffff #000 #000 #ffffff !important;
+  padding: 2px 8px;
+}
+
+/* buttons — classic Win95 3D outset */
+.btn {
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  border: 2px solid !important;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  border-radius: 0 !important;
+  box-shadow: 1px 1px 0 #000 !important;
+  padding: 4px 14px !important;
+  font-family: 'MS Sans Serif', 'Tahoma', sans-serif;
+}
+.btn:hover {
+  transform: none !important;
+  box-shadow: 1px 1px 0 #000 !important;
+  background: #d4d0c8 !important;
+}
+.btn:active {
+  transform: translate(1px, 1px) !important;
+  border-color: #404040 #ffffff #ffffff #404040 !important;
+  box-shadow: none !important;
+}
+.btn.mint, .btn.lemon { background: #c0c0c0 !important; }
+
+/* footer */
+.footer {
+  color: #ffffff;
+  text-shadow: 1px 1px 0 #000;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #404040;
+  padding: 8px 0;
+  background: #008080;
+}
+.footer .blink { color: #ffff00; }
+
+/* marquee — navy scroller with yellow text */
+.marquee-wrap {
+  background: #000080 !important;
+  color: #ffff00 !important;
+  font-family: 'MS Sans Serif', 'Tahoma', sans-serif;
+}
+.marquee-track .star { color: #ff0000; }
+
+/* code — DOS terminal */
+.content-card pre {
+  background: #000000 !important;
+  color: #00ff00 !important;
+  border: 2px solid;
+  border-color: #404040 #ffffff #ffffff #404040 !important;
+  box-shadow: 2px 2px 0 #000 !important;
+  border-radius: 0 !important;
+  font-family: 'Courier New', 'Anonymous Pro', monospace;
+}
+.content-card pre::before { display: none; }
+.content-card pre::after {
+  content: "C:\\>" !important;
+  color: #00ff00 !important;
+  font-family: 'Courier New', monospace;
+  top: 4px !important;
+}
+.content-card code {
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  border: 1px solid #808080 !important;
+  border-radius: 0 !important;
+  font-family: 'Courier New', 'Anonymous Pro', monospace;
+}
+
+/* blockquote — inset silver */
+.content-card blockquote {
+  background: #c0c0c0 !important;
+  border: 2px solid;
+  border-color: #404040 #ffffff #ffffff #404040 !important;
+  border-left: 4px solid #ff0000 !important;
+  border-radius: 0 !important;
+  color: #000;
+}
+
+/* tables */
+.content-card table,
+.content-card table.song-meta {
+  background: #c0c0c0 !important;
+  border: 2px solid;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  box-shadow: 2px 2px 0 #000 !important;
+}
+.content-card table th,
+.content-card table.song-meta th {
+  background: #000080 !important;
+  color: #ffffff !important;
+  border-right: 1px solid #808080 !important;
+  border-bottom: 1px solid #000 !important;
+}
+.content-card table td,
+.content-card table.song-meta td {
+  background: #ffffff !important;
+  border-bottom: 1px solid #808080 !important;
+}
+
+/* link cards — silver buttons */
+.link-card {
+  background: #c0c0c0 !important;
+  border: 2px solid;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  box-shadow: 2px 2px 0 #000 !important;
+  transition: none !important;
+}
+.link-card:hover {
+  transform: none !important;
+  background: #d4d0c8 !important;
+}
+.link-card:active {
+  border-color: #404040 #ffffff #ffffff #404040 !important;
+  box-shadow: none !important;
+}
+.link-card .lc-icon {
+  background: #000080 !important;
+  color: #ffff00 !important;
+  border: 2px solid;
+  border-color: #ffffff #000 #000 #ffffff !important;
+}
+.link-card .lc-sub { color: #000080; }
+
+/* visit counter — LCD panel, keep it */
+.visit-counter {
+  border: 2px solid;
+  border-color: #404040 #ffffff #ffffff #404040 !important;
+}
+
+/* webring arrow */
+.webring .arrow {
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  border: 2px solid !important;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+}
+.webring .arrow:hover { transform: none !important; }
+.webring .arrow:active {
+  border-color: #404040 #ffffff #ffffff #404040 !important;
+}
+
+/* tweaks toggle button */
+.tweaks-toggle {
+  background: #c0c0c0 !important;
+  border: 2px solid !important;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  box-shadow: 1px 1px 0 #000 !important;
+  border-radius: 0 !important;
+}
+.tweaks-toggle:hover { transform: none !important; }
+
+/* lightbox frame — silver window */
+.lightbox-frame {
+  background: #c0c0c0 !important;
+  border: 2px solid !important;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  box-shadow: 4px 4px 0 #000 !important;
+  border-radius: 0 !important;
+}
+.lightbox-close {
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  border: 2px solid !important;
+  border-color: #ffffff #404040 #404040 #ffffff !important;
+  box-shadow: 1px 1px 0 #000 !important;
+  border-radius: 0 !important;
+  top: 4px !important;
+  right: 4px !important;
+  width: 24px !important;
+  height: 24px !important;
+  font-size: 14px !important;
+}
+.lightbox-close:hover { transform: none !important; background: #d4d0c8 !important; }
+.lightbox::before {
+  background: rgba(0, 0, 128, 0.5) !important;
+  backdrop-filter: none !important;
+}
+
+/* post images — flat black border, block shadow */
+.post-figure img,
+.content-card .post-body img,
+.post-gallery .gallery-img-wrap {
+  border: 2px solid #000 !important;
+  box-shadow: 3px 3px 0 #000 !important;
+  border-radius: 0 !important;
+}
+
+/* eq bars — hot pixels */
+.eq span { background: #ff0000 !important; }
+.eq span:nth-child(2), .eq span:nth-child(4) { background: #000080 !important; }
+
+/* content list bullets — ASCII arrow */
+.content-card ul li::before {
+  content: "»" !important;
+  color: #ff0000 !important;
+  font-weight: 900;
+}
+
+/* footnotes */
+ul.footnotes {
+  background: #ffff00 !important;
+  border: 1px solid #000 !important;
+  color: #000 !important;
+}
+ul.footnotes b { color: #ff0000 !important; }
+

@@ -17,7 +17,7 @@ const TWEAK_DEFAULTS = {
   starCount: 90,
   starSpeed: 1,
   starSize: 28,
-  palette: 'pastel-rainbow',
+  palette: 'win95',
   showSparkles: true,
   showMarquee: true,
   contentWidth: 1600,
@@ -27,7 +27,7 @@ export function App() {
   const { route, go } = useRouter();
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [tweaksOpen, setTweaksOpen] = useState(false);
-  const palette = PALETTES[tweaks.palette] || PALETTES['pastel-rainbow'];
+  const palette = PALETTES[tweaks.palette] || PALETTES['win95'];
 
   return (
     <>
@@ -63,7 +63,8 @@ export function App() {
         <TweakSlider label="Drift speed" value={tweaks.starSpeed} min={0.3} max={3} step={0.1} onChange={(v) => setTweak('starSpeed', v)} />
         <TweakSlider label="Star size"   value={tweaks.starSize}  min={12} max={48} step={2}  onChange={(v) => setTweak('starSize', v)} />
         <TweakSelect label="Palette" value={tweaks.palette} options={[
-          { value: 'pastel-rainbow', label: 'pastel rainbow (default)' },
+          { value: 'win95',          label: 'windows 95 (default)' },
+          { value: 'pastel-rainbow', label: 'pastel rainbow' },
           { value: 'pink-mint',      label: 'pink + mint' },
           { value: 'lemon-sky',      label: 'lemon + sky' },
           { value: 'kawaii-sunset',  label: 'kawaii sunset' },
