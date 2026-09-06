@@ -6,7 +6,7 @@ export function ClickSparkles() {
   useEffect(() => {
     const onClick = (e) => {
       const id = Math.random().toString(36).slice(2);
-      const palette = ['#ffffff', '#f9c1da', '#fff8a8', '#bdeadf', '#b9dff5'];
+      const palette = ['#ffffff', '#ffff00', '#ff0000', '#00ffff', '#000080', '#ff00ff'];
       const pieces = Array.from({ length: 7 }, (_, k) => ({
         k,
         ang: (k / 7) * Math.PI * 2 + Math.random() * 0.6,

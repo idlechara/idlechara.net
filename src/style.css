@@ -1486,3 +1486,53 @@ ul.footnotes {
 }
 ul.footnotes b { color: #ff0000 !important; }
 
+/* ============================================================
+   WIN95 WINDOW-OPEN TRANSITIONS
+   Replaces the pastel fade with the classic expanding-rectangle
+   zoom from screen center. Stepped, snappy, no easing.
+   ============================================================ */
+
+.content-card {
+  animation: win95Open 160ms steps(5, end) !important;
+  transform-origin: center center;
+}
+.blog-entry {
+  animation: win95OpenSmall 120ms steps(4, end);
+  transform-origin: left center;
+}
+@keyframes win95Open {
+  0%   { clip-path: inset(48% 48% 48% 48%); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes win95OpenSmall {
+  0%   { clip-path: inset(45% 45% 45% 45%); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+/* now-listening carousel — remove smooth ease, use instant swap */
+.now-listening-slide.slide-next,
+.now-listening-slide.slide-prev {
+  animation: none !important;
+}
+
+/* lightbox — replace bubble spring with stepped Win95 open */
+.lightbox-frame {
+  animation: win95Open 140ms steps(4, end) !important;
+}
+.lightbox-frame.closing {
+  animation: win95Close 120ms steps(4, end) forwards !important;
+}
+@keyframes win95Close {
+  0%   { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(50% 50% 50% 50%); }
+}
+.lightbox::before {
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content-card, .blog-entry, .lightbox-frame {
+    animation: none !important;
+  }
+}
+

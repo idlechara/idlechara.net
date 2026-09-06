@@ -12,16 +12,9 @@ import {
   TweakSlider, TweakToggle, TweakSelect,
 } from './components/TweaksPanel.jsx';
 import { PALETTES } from './data/palettes.js';
+import { SITE_CONFIG } from './data/config.js';
 
-const TWEAK_DEFAULTS = {
-  starCount: 90,
-  starSpeed: 1,
-  starSize: 28,
-  palette: 'win95',
-  showSparkles: true,
-  showMarquee: true,
-  contentWidth: 1600,
-};
+const TWEAK_DEFAULTS = SITE_CONFIG.defaults;
 
 export function App() {
   const { route, go } = useRouter();
@@ -46,14 +39,16 @@ export function App() {
         <Footer />
       </div>
 
-      <button
-        className="tweaks-toggle"
-        onClick={() => setTweaksOpen((v) => !v)}
-        title="Tweaks"
-        aria-label="Open tweaks panel"
-      >
-        ⚙
-      </button>
+      {SITE_CONFIG.showTweaksButton && (
+        <button
+          className="tweaks-toggle"
+          onClick={() => setTweaksOpen((v) => !v)}
+          title="Tweaks"
+          aria-label="Open tweaks panel"
+        >
+          ⚙
+        </button>
+      )}
 
       <TweaksPanel open={tweaksOpen} onClose={() => setTweaksOpen(false)}>
         <TweakSection label="Layout" />
@@ -62,12 +57,10 @@ export function App() {
         <TweakSlider label="Star count"  value={tweaks.starCount} min={20} max={220} step={10} onChange={(v) => setTweak('starCount', v)} />
         <TweakSlider label="Drift speed" value={tweaks.starSpeed} min={0.3} max={3} step={0.1} onChange={(v) => setTweak('starSpeed', v)} />
         <TweakSlider label="Star size"   value={tweaks.starSize}  min={12} max={48} step={2}  onChange={(v) => setTweak('starSize', v)} />
-        <TweakSelect label="Palette" value={tweaks.palette} options={[
+        <TweakSelect label="Star colors" value={tweaks.palette} options={[
           { value: 'win95',          label: 'windows 95 (default)' },
-          { value: 'pastel-rainbow', label: 'pastel rainbow' },
-          { value: 'pink-mint',      label: 'pink + mint' },
-          { value: 'lemon-sky',      label: 'lemon + sky' },
-          { value: 'kawaii-sunset',  label: 'kawaii sunset' },
+          { value: 'win95-hot',      label: 'win95 hot (red/yellow)' },
+          { value: 'win95-cool',     label: 'win95 cool (cyan/navy)' },
         ]} onChange={(v) => setTweak('palette', v)} />
         <TweakSection label="Interaction fx" />
         <TweakToggle label="Click sparkles"  value={tweaks.showSparkles} onChange={(v) => setTweak('showSparkles', v)} />
