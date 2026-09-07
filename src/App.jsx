@@ -24,7 +24,9 @@ export function App() {
 
   return (
     <>
-      <StarField count={tweaks.starCount} palette={palette} speed={tweaks.starSpeed} size={tweaks.starSize} />
+      {SITE_CONFIG.showStars && (
+        <StarField count={tweaks.starCount} palette={palette} speed={tweaks.starSpeed} size={tweaks.starSize} />
+      )}
       {tweaks.showSparkles && <ClickSparkles />}
       <Lightbox />
 

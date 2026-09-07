@@ -1,12 +1,13 @@
 export const SITE_CONFIG = {
   showTweaksButton: false,
+  showStars: false,
 
   defaults: {
-    starCount: 220,
-    starSpeed: 3,
-    starSize: 48,
+    starCount: 0,
+    starSpeed: 1,
+    starSize: 28,
     palette: 'win95-cool',
-    showSparkles: true,
+    showSparkles: false,
     showMarquee: true,
     contentWidth: 2000,
   },
