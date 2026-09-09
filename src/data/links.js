@@ -8,7 +8,7 @@ export const LINK_GROUPS = [
       { icon: 'G', label: 'GitHub',      sub: 'idlechara',           href: 'https://github.com/idlechara',            color: 'var(--periwinkle)' },
       { icon: 'B', label: 'Bluesky',     sub: 'idlechara',           href: 'https://bsky.app/profile/idlechara.bsky.social',      color: 'var(--sky)' },
       { icon: 'D', label: 'Discord',     sub: 'idlechara',           href: 'https://discord.com/users/idlechara',     color: 'var(--lavender)' },
-      { icon: 'I', label: 'Instagram',   sub: 'photography',         href: 'https://instagram.com/lovelikesblood', color: 'var(--pink)' },
+      { icon: 'I', label: 'Instagram',   sub: 'photography',         href: 'https://instagram.com/idlechara.photo', color: 'var(--pink)' },
     ],
   },
   // {
